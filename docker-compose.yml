@@ -1,0 +1,31 @@
+services:
+  backend-dev:
+    profiles: ["development"]
+    container_name: backend-dev
+    working_dir: /app/backend
+    image: backend:latest
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app/backend        # Código vivo para desarrollo
+    command: ["sh", "-c", "npm install && npm run dev"]
+
+  backend-prod:
+    profiles: ["production"]
+    working_dir: /app/backend
+    container_name: backend-prod
+    image: backend:latest
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app/backend        # Código vivo para desarrollo
+    environment:
+      - NODE_ENV=production
+    restart: "unless-stopped"      # No reiniciar
+    command: ["sh", "-c", "npm install && npm run dev"]
