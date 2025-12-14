@@ -10,7 +10,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./backend:/app/backend        # Código vivo para desarrollo
+      - ./backend:/app/backend        
     command: ["sh", "-c", "npm install && npm run dev"]
 
   backend-prod:
@@ -24,7 +24,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./backend:/app/backend        # Código vivo para desarrollo
+      - ./backend:/app/backend        
     environment:
       - NODE_ENV=production
     restart: "unless-stopped"      # No reiniciar
