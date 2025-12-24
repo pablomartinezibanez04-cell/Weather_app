@@ -1,11 +1,10 @@
+import 'dotenv/config';
 import express from 'express';
+import router from './router/endpoints.js';
 
 const app = express();
-
-app.get('/', (req, res) => {
-    console.log('Received a request at /');
-    res.send('Hello, World');
-});
+app.use(express.json());
+app.use("/api/v1", router);
 
 app.listen(3000, () => {
     console.log('Server is running on http://localhost:3000');

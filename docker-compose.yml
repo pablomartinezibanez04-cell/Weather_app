@@ -11,7 +11,7 @@ services:
       - "3000:3000"
     volumes:
       - ./backend:/app/backend        
-    command: ["sh", "-c", "npm install && npm run dev"]
+    command: ["npm", "run", "dev"] #["sh", "-c", "npm install && npm run dev"]
 
   backend-prod:
     profiles: ["production"]
@@ -28,4 +28,4 @@ services:
     environment:
       - NODE_ENV=production
     restart: "unless-stopped"      # No reiniciar
-    command: ["sh", "-c", "npm install && npm run dev"]
+    command: ["npm", "run", "dev"] #["sh", "-c", "npm install && npm run dev"]
