@@ -3,24 +3,27 @@ services:
     profiles: ["development"]
     container_name: backend-dev
     working_dir: /app/backend
-    image: backend:latest
+    image: weatherbackend:dev
     build:
       context: ./backend
       dockerfile: Dockerfile
+      target: dev
     ports:
       - "3000:3000"
     volumes:
-      - ./backend:/app/backend        
+      - ./backend:/app/backend  
+      - /app/backend/node_modules  
     command: ["npm", "run", "dev"] #["sh", "-c", "npm install && npm run dev"]
 
   backend-prod:
     profiles: ["production"]
     working_dir: /app/backend
     container_name: backend-prod
-    image: backend:latest
+    image: weatherbackend:prod
     build:
       context: ./backend
       dockerfile: Dockerfile
+      target: prod
     ports:
       - "3000:3000"
     volumes:
@@ -28,4 +31,4 @@ services:
     environment:
       - NODE_ENV=production
     restart: "unless-stopped"      # No reiniciar
-    command: ["npm", "run", "dev"] #["sh", "-c", "npm install && npm run dev"]
+    command: ["npm", "run", "start"] #["sh", "-c", "npm install && npm run dev"]
